@@ -1,9 +1,11 @@
 package gpt
 
 import (
+	"io"
 	"net/http"
 
 	"github.com/RajaPremSai/go-openai-dicord-bot/pkg/bot"
+	"github.com/RajaPremSai/go-openai-dicord-bot/pkg/utils"
 	discord "github.com/bwmarrin/discordgo"
 	"github.com/sashabaranov/go-openai"
 )
@@ -42,11 +44,25 @@ func sendChatGPTRequest(client *openai.Client, cacheItem *MessagesCacheData) (*c
 }
 
 func getUrlData(client *http.Client, url string) (string, error) {
+	res, err := client.Get(url)
+	if err != nil {
+		return "", err
+	}
 
+	defer res.Body.Close()
+	content, err := io.ReadAll(res.Body)
+	if err != nil {
+		return "", err
+	}
+
+	return string(content), nil
 }
 
 func getContentOrURLData(client *http.Client, s string) (content string, err error) {
-
+	if utils.IsURL(s) {
+		content, err = getUrlData(client, s)
+	}
+	return content, err
 }
 
 func parseInteractionReply(discordMessage *discord.Message) (prompt string, context string, model string, temperature *float32) {
@@ -69,8 +85,10 @@ func adjustMessageTokens(cacheItem *MessagesCacheData) {
 
 }
 
-func isCacheItemWithinTurncateLimit(cacheItem *MessagesCacheData) (ok bool, count int) {
+func isCacheItemWithinTruncateLimit(cacheItem *MessagesCacheData) (ok bool, count int) {
 
 }
 
-func generateThreadTitleBasedOnInitialPrompt(ctx *bot.Context, client *openai.Client, threadID string, messages []openai.ChatCompletionChoice)
+func generateThreadTitleBasedOnInitialPrompt(ctx *bot.Context, client *openai.Client, threadID string, messages []openai.ChatCompletionChoice) {
+
+}

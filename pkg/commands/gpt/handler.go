@@ -5,9 +5,9 @@ import (
 	"log"
 
 	"github.com/RajaPremSai/go-openai-dicord-bot/pkg/bot"
-	"github.com/RajaPremSai/go-openai-dicord-bot/pkg/commands/gpt/utils"
 	"github.com/RajaPremSai/go-openai-dicord-bot/pkg/constants"
-	discord "github.com/dwmarrin/discordgo"
+	"github.com/RajaPremSai/go-openai-dicord-bot/pkg/utils"
+	discord "github.com/bwmarrin/discordgo"
 	"github.com/sashabaranov/go-openai"
 )
 
@@ -37,8 +37,6 @@ func chatGPTHandler(ctx *bot.Context, client *openai.Client, messagesCache *Mess
 	if option, ok := ctx.Options[gptCommandOptionPrompt.string()]; ok {
 		prompt = option.StringValue()
 	} else {
-		// We can't have empty prompt, unfortunately
-		// this should not happen, discord prevents empty required options
 		log.Printf("[GID: %s, i.ID: %s] Failed to parse prompt option\n", ctx.Interaction.GuildID, ctx.Interaction.ID)
 		ctx.FollowupMessageCreate(ctx.Interaction, true, &discord.WebhookParams{
 			Embeds: []*discord.MessageEmbed{

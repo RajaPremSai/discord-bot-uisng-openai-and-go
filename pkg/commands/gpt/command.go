@@ -34,7 +34,7 @@ func Command(client *openai.Client, completionModels []string, messagesCache *Me
 	}
 	numberOfModels := len(completionModels)
 	if numberOfModels > 0 {
-		gptDefaultModel = completionModels[0] // set first model as default one
+		gptDefaultModel = completionModels[0]
 	}
 	if numberOfModels > 1 {
 		var modelChoices []*discord.ApplicationCommandOptionChoice

@@ -5,6 +5,9 @@ import (
 	"os"
 
 	"github.com/RajaPremSai/go-openai-dicord-bot/pkg/bot"
+	"github.com/RajaPremSai/go-openai-dicord-bot/pkg/commands"
+	"github.com/RajaPremSai/go-openai-dicord-bot/pkg/commands/gpt"
+	"github.com/RajaPremSai/go-openai-dicord-bot/pkg/constants"
 	"github.com/sashabaranov/go-openai"
 	"github.com/stretchr/testify/assert/yaml"
 )

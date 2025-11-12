@@ -10,7 +10,7 @@ import (
 )
 
 func imageInteractionResponseMiddleware(ctx *bot.Context) {
-	log.Printf("[GID:%s,i.ID:%s] Image interaction invoked by UserID: %s\n", ctx.Interaction.GuildID, ctx.Interaction.ID)
+	log.Printf("[GID:%s,i.ID:%s] Image interaction invoked by UserID: %s\n", ctx.Interaction.GuildID, ctx.Interaction.ID, ctx.Interaction.Member.User.ID)
 
 	err := ctx.Respond(&discord.InteractionResponse{
 		Type: discord.InteractionResponseDeferredChannelMessageWithSource,

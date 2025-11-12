@@ -12,9 +12,14 @@ build:
 	@echo "Building Docker image..."
 	docker build -t $(IMAGE_NAME):$(VERSION) .
 
+# run:
+# 	@echo "Running Docker container..."
+# 	docker run --name $(CONTAINER_NAME) -d $(IMAGE_NAME):$(VERSION)
 run:
 	@echo "Running Docker container..."
-	docker run --name $(CONTAINER_NAME) -d $(IMAGE_NAME):$(VERSION)
+	docker run --name $(CONTAINER_NAME) \
+	-v $(PWD)/credentials.yaml:/app/credentials.yaml:ro \
+	-d $(IMAGE_NAME):$(VERSION)
 
 stop:
 	@echo "Stopping Docker container..."

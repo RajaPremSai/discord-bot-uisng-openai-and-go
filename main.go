@@ -9,7 +9,9 @@ import (
 	"github.com/RajaPremSai/go-openai-dicord-bot/pkg/commands/gpt"
 	"github.com/RajaPremSai/go-openai-dicord-bot/pkg/constants"
 	"github.com/sashabaranov/go-openai"
-	"github.com/stretchr/testify/assert/yaml"
+
+	// "github.com/stretchr/testify/assert/yaml"
+	"gopkg.in/yaml.v3"
 )
 
 type Config struct {
@@ -71,6 +73,7 @@ func main() {
 			IgnoredChannelsCache:   &ignoredChannelsCache}))
 		discordBot.Router.Register(commands.ImageCommand(openaiClient))
 	}
+	log.Printf("Loaded Discord Token: %s", config.Discord.Token)
 	discordBot.Router.Register(commands.InfoCommand())
 	discordBot.Run(config.Discord.Guild, config.Discord.RemoveCommands)
 }

@@ -17,7 +17,7 @@ type Bot struct {
 }
 
 func NewBot(token string) (*Bot, error) {
-	session, err := discord.New("Bot" + token)
+	session, err := discord.New("Bot " + token)
 	if err != nil {
 		return nil, err
 	}
